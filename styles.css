@@ -64,6 +64,7 @@ body {
   color: var(--c-text);
   line-height: 1.7;
   overflow-x: hidden;
+  overflow-wrap: break-word;
 }
 
 img { display: block; max-width: 100%; height: auto; }
@@ -524,6 +525,13 @@ address { font-style: normal; }
   margin-left: auto;
   margin-right: auto;
   letter-spacing: 0.01em;
+  overflow-wrap: break-word;
+}
+/* Collapse the <br> into a single space on small phones to avoid
+   an overlong lone second line in a narrow centered column */
+@media (max-width: 480px) {
+  .hero__sub br { display: none; }
+  .hero__sub { max-width: 100%; }
 }
 .hero__ctas {
   display: flex;
@@ -1823,8 +1831,10 @@ select.form-input option { background: var(--c-card); color: var(--c-text); }
   .nav__actions .btn--primary { display: inline-flex; }
 
   .about__grid { grid-template-columns: 1fr; gap: var(--space-xl); }
-  .about__images { max-width: 560px; margin: 0 auto; }
+  .about__images { max-width: 560px; margin: 0 auto; margin-bottom: 2rem; }
   .about__img-main { aspect-ratio: 16/9; }
+  /* Pull accent image back inside the viewport on single-column layout */
+  .about__img-accent-wrap { right: 0; bottom: -2rem; }
 
   .dishes__grid { grid-template-columns: repeat(2, 1fr); }
 
@@ -1855,9 +1865,17 @@ select.form-input option { background: var(--c-card); color: var(--c-text); }
   .section--dark { padding: var(--space-2xl) 0; }
 
   .hero__title-line1,
-  .hero__title-line2 { font-size: clamp(2.4rem, 12vw, 4rem); }
+  .hero__title-line2 { font-size: clamp(2.2rem, 11vw, 4rem); }
   .hero__ctas { flex-direction: column; align-items: stretch; }
   .hero__ctas .btn { text-align: center; justify-content: center; }
+  /* Restore vertical padding lost when .container shorthand overrides .hero__content */
+  .hero__content { padding-top: 1.5rem; padding-bottom: 1rem; }
+  /* Let eyebrow pill text wrap on narrow screens */
+  .hero__eyebrow { white-space: normal; font-size: 0.6rem; }
+  /* Tighten about accent image further on small phones */
+  .about__img-accent-wrap { right: 0; bottom: -1rem; width: 46%; }
+  /* Reduce form card inner padding */
+  .reservation__form-card { padding: 1.5rem; }
 
   .nav__actions .btn--primary { display: none; }
 
@@ -1902,16 +1920,33 @@ select.form-input option { background: var(--c-card); color: var(--c-text); }
 @media (max-width: 480px) {
   .gallery-masonry { columns: 1; }
   .experience__features { grid-template-columns: 1fr; }
-  .press-logos { gap: 1rem; }
+  .press-logos { gap: 1rem; flex-wrap: wrap; }
   .fabs { bottom: 1.25rem; right: 1rem; }
   .fab--whatsapp, .fab--call { width: 46px; height: 46px; }
   .fab--book { padding: 0.65rem 1rem 0.65rem 0.9rem; }
+  .hero__eyebrow { font-size: 0.58rem; letter-spacing: 0.14em; }
+  .hero__sub { font-size: 0.82rem; }
+  .menu-search-wrap { max-width: 100%; }
+  .about__img-accent-wrap { width: 44%; right: 0; bottom: -0.75rem; }
 }
 
 /* ── ≤400px ── */
 @media (max-width: 400px) {
   :root { --space-3xl: 3rem; }
   .hero__stats { display: none; }
+}
+
+/* ── ≤375px (very narrow phones — iPhone SE, Galaxy A05, etc.) ── */
+@media (max-width: 375px) {
+  .container { padding: 0 1rem; }
+  .hero__title-line1,
+  .hero__title-line2 { font-size: clamp(1.9rem, 10vw, 2.8rem); }
+  .hero__eyebrow { font-size: 0.54rem; letter-spacing: 0.1em; }
+  .testimonial-card { padding: 1.25rem; }
+  .award-card { padding: 1.5rem 1rem; }
+  .reservation__form-card { padding: 1.25rem; }
+  .about__img-accent-wrap { width: 42%; right: 0; bottom: -0.5rem; }
+  .nav__logo-sub { display: none; }
 }
 
 /* ── Tablet mid-range gallery ── */
