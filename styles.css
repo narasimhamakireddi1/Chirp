@@ -401,18 +401,8 @@ address { font-style: normal; }
   flex-shrink: 0;
 }
 .mobile-menu__close {
-  position: absolute;
-  top: 0.8rem; right: 1.25rem;
-  width: 2rem; height: 2rem;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
-  color: var(--c-text-muted);
-  background: var(--c-card);
-  border-radius: 50%;
-  line-height: 1;
-  transition: color var(--transition), background var(--transition);
+  display: none;
 }
-.mobile-menu__close:hover { color: var(--c-saffron); background: var(--c-card-2); }
 .mobile-menu__links {
   display: flex;
   flex-direction: column;
@@ -2203,7 +2193,7 @@ select.form-input option { background: var(--c-card); color: var(--c-text); }
 [data-theme="light"] .mobile-menu__handle { background: var(--c-border); }
 [data-theme="light"] .mobile-menu__link { color: var(--c-text-2); }
 [data-theme="light"] .mobile-menu__link:hover { color: var(--c-saffron); }
-[data-theme="light"] .mobile-menu__close { color: var(--c-text-2); background: var(--c-card); }
+
 
 /* ── Light mode: mobile menu toggle ── */
 [data-theme="light"] .theme-toggle--mobile {
